@@ -9,10 +9,10 @@ namespace Howframework.Domain.UserManagement
     {
         public User()
         {
-
+            
         }
 
-        public virtual string Name { get; set; }
+        public virtual string FullName { get; set; }
 
         public virtual string Password { get; set; }
 
@@ -21,4 +21,6 @@ namespace Howframework.Domain.UserManagement
         public virtual string UserName { get; set; }
 
     }
+
+   
 }

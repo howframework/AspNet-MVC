@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Registration";
+    
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#newTrainerForm').submit(function () {
+
+            var form = $(this);
+            $.ajax({
+                url: form.attr('action'),
+                type: "POST",
+                data: form.serialize(),
+                success: function (data) {
+                    
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+
+                }
+
+            });
+            return false;
+        });
+
+    });
+</script>
+
+<div>
+<h2>Registration</h2>
+      <form class="form-horizontal" id="newTrainerForm" action="/UserRegistration/Register" >
+        <fieldset>
+          <div class="control-group">
+            <label for="input01" class="control-label">Full Name</label>
+            <div class="controls">
+              <input type="text" id="fullname" name="fullname" class="input-xlarge">
+              
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="input01" class="control-label">Email</label>
+            <div class="controls">
+              <input type="text" id="email" name="email" class="input-xlarge">
+              
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="input01" class="control-label">User Name</label>
+            <div class="controls">
+              <input type="text" id="username" name="username" class="input-xlarge">
+              
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="input01" class="control-label">Password</label>
+            <div class="controls">
+              <input type="password" id="password" name="password" class="input-xlarge">
+              
+            </div>
+          </div>
+
+          
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Save changes</button>
+            <button class="btn">Cancel</button>
+          </div>
+        </fieldset>
+      </form>
+</div>
+

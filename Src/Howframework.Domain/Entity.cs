@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 
 namespace Howframework.Domain
 {
@@ -12,6 +13,6 @@ namespace Howframework.Domain
 
         }
 
-        public virtual Guid Id { get; set; }
+        public virtual ObjectId Id { get; set; }
     }
 }
