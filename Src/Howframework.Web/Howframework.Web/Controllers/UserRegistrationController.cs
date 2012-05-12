@@ -37,7 +37,7 @@ namespace Howframework.Web.Controllers
            
             using (var uow = server.StartUnitOfWork())
             {
-                uow.Save<User>(new User { Email = "email", FullName = fullname, Password = "password", UserName = "username" });
+                uow.Save<User>(new User { Email = email, FullName = fullname, Password = password, UserName = username });
             }
 
             return View();
