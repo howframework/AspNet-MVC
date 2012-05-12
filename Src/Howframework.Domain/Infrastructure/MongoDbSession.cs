@@ -5,6 +5,7 @@ using System.Text;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson;
+using System.Configuration;
 
 namespace Howframework.Domain.Infrastructure
 {
@@ -16,7 +17,7 @@ namespace Howframework.Domain.Infrastructure
 
         public IUnitOfWork StartUnitOfWork()
         {
-            var connectionString = "mongodb://localhost/?safe=true";
+            var connectionString = System.Configuration.ConfigurationManager.AppSettings["MONGOLAB_URI"]; //AppSettings //"mongodb://localhost/?safe=true";
             mongoServer = MongoServer.Create(connectionString);
             mongoDb = mongoServer.GetDatabase("howframework");
             return this;
