@@ -3,6 +3,8 @@ AspNet-MVC
 
 Simple Blog App with ASP.NET MVC will be hosted at http://appharbor.com
 
+* <a href="http://aspnetmvc-hfwork.apphb.com/">Demo</a>
+
 Prerequisites
 =============
 Before you begin, you should install the following pre-requisites:
