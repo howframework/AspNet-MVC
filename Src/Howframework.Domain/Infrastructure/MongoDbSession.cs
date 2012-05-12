@@ -19,6 +19,7 @@ namespace Howframework.Domain.Infrastructure
         {
             var connectionString = System.Configuration.ConfigurationManager.AppSettings["MONGOLAB_URI"]; //AppSettings //"mongodb://localhost/?safe=true";
             mongoServer = MongoServer.Create(connectionString);
+            MongoCredentials credentials = new MongoCredentials("howframework", "linuxpython");
             mongoDb = mongoServer.GetDatabase("howframework");
             return this;
         }
