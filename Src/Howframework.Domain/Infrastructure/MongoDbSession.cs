@@ -11,16 +11,16 @@ namespace Howframework.Domain.Infrastructure
 {
     public class MongoDbSession : IUnitOfWork
     {
-        MongoServer mongoServer;
+        //MongoServer mongoServer;
 
         MongoDatabase mongoDb;
 
         public IUnitOfWork StartUnitOfWork()
         {
-            var connectionString = System.Configuration.ConfigurationManager.AppSettings["MONGOLAB_URI"]; //AppSettings //"mongodb://localhost/?safe=true";
-            mongoServer = MongoServer.Create(connectionString);
-            MongoCredentials credentials = new MongoCredentials("howframework", "linuxpython");
-            mongoDb = mongoServer.GetDatabase("howframework");
+            var connectionString = System.Configuration.ConfigurationManager.AppSettings.Get("MONGOLAB_URI"); //AppSettings //"mongodb://localhost/?safe=true";
+            mongoDb = MongoDatabase.Create(connectionString); //MongoServer.Create(connectionString);
+            //MongoCredentials credentials = new MongoCredentials("howframework", "linuxpython");
+            //mongoDb = mongoServer.GetDatabase("howframework");
             return this;
         }
 
