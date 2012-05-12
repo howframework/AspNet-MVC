@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width" />
     
         <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+        @*<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />*@
         <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/modernizr-2.0.6-development-only.js")" type="text/javascript"></script>
 
@@ -20,6 +20,32 @@
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
+        @*<script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#loginForm').submit(function () {
+
+                    var form = $(this);
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: "POST",
+                        data: form.serialize(),
+                        success: function (data) {
+
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        },
+                        complete: function () {
+
+                        }
+
+                    });
+                    return false;
+                });
+
+            });
+        </script>*@
 	</head>
 
 	<body>
@@ -43,11 +69,11 @@
 		</div>
 
 		<header>
-			<div class="container">
+			<div class="container" style="margin-top:50px">
 				<div class="row">
 					<div class="span6">
 						<h1>This is my header</h1>
-						<p>This is my site slogan</p>
+						<p>Asp.Net MVC</p>
 					</div>
 					<div class="span6">
 						<p>Proin id libero molestie ante faucibus tincidunt sit amet ac nisi. Mauris feugiat ultricies magna eu laoreet. Nunc tincidunt tempus leo vitae gravida.
@@ -79,9 +105,10 @@
 					<div id="sidebar" class="span4">
 						<div class="widget">
 							<div>
-                                    <form class="well form-inline">
-                                    <input type="text" class="input-small" placeholder="Email">
-                                    <input type="password" class="input-small" placeholder="Password">
+                            
+                                    <form class="well form-inline" id="loginForm" action="/Authentication/Login" method="post">
+                                    <input type="text" class="input-small" name="username" placeholder="Username">
+                                    <input type="password" class="input-small" name="password" placeholder="Password">
                                     <label class="checkbox">
                                     <input type="checkbox"> Remember me
                                     </label>
@@ -103,8 +130,8 @@
 			</div>
 		</footer>
 		<!-- JS -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>*@
+
 	</body>
 </html>
 

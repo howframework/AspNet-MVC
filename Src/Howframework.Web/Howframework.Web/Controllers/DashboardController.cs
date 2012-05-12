@@ -6,16 +6,13 @@ using System.Web.Mvc;
 
 namespace Howframework.Web.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Dashboard/
 
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Dashboard");
-
             return View();
         }
 

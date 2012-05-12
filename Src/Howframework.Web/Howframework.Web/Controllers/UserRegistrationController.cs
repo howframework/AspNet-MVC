@@ -35,7 +35,7 @@ namespace Howframework.Web.Controllers
         public ActionResult Register(string fullname,string username,string email,string password)
         {
            
-            using (var uow = server.StartSession())
+            using (var uow = server.StartUnitOfWork())
             {
                 uow.Save<User>(new User { Email = "email", FullName = fullname, Password = "password", UserName = "username" });
             }

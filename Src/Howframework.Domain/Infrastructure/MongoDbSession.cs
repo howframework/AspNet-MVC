@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using MongoDB.Bson;
 
 namespace Howframework.Domain.Infrastructure
 {
@@ -12,7 +14,7 @@ namespace Howframework.Domain.Infrastructure
 
         MongoDatabase mongoDb;
 
-        public IUnitOfWork StartSession()
+        public IUnitOfWork StartUnitOfWork()
         {
             var connectionString = "mongodb://localhost/?safe=true";
             mongoServer = MongoServer.Create(connectionString);
@@ -24,6 +26,12 @@ namespace Howframework.Domain.Infrastructure
         {
             var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
             s.Save<T>(entity);
+        }
+
+        public T GetById<T>(dynamic Id)
+        {
+            var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
+            return s.FindOneById(Id);
         }
 
         public void Dispose()

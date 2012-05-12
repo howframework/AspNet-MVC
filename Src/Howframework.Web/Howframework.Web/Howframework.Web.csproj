@@ -108,6 +108,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IUnitOfWork.cs" />
     <Compile Include="Controllers\UserRegistrationController.cs" />
@@ -198,7 +200,7 @@
     <Content Include="Views\UserRegistration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UserRegistration\Registration.cshtml" />
+    <Content Include="Views\UserRegistration\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_RegistrationLayout.cshtml" />
@@ -208,6 +210,9 @@
       <Project>{C01DDFA9-3FED-45D7-981F-A003399BE5C3}</Project>
       <Name>Howframework.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
