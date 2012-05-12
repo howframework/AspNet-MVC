@@ -20,6 +20,11 @@ namespace Howframework.Web.Controllers
             server = new MongoDbSession();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(string username,string password)
         {

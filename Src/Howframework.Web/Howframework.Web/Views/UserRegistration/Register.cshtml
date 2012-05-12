@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
 }
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(document).ready(function () {
 
         $('#newTrainerForm').submit(function () {
@@ -15,7 +15,7 @@
                 type: "POST",
                 data: form.serialize(),
                 success: function (data) {
-                    
+                    window.location.replace(data.Url);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -29,11 +29,11 @@
         });
 
     });
-</script>
+</script>*@
 
 <div>
 <h2>Registration</h2>
-      <form class="form-horizontal" id="newTrainerForm" action="/UserRegistration/Register" >
+      <form class="form-horizontal" id="newRegisterUserForm" action="/UserRegistration/Register" >
         <fieldset>
           <div class="control-group">
             <label for="input01" class="control-label">Full Name</label>

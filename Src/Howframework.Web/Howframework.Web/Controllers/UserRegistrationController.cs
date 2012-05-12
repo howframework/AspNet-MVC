@@ -39,8 +39,11 @@ namespace Howframework.Web.Controllers
             {
                 uow.Save<User>(new User { Email = email, FullName = fullname, Password = password, UserName = username });
             }
+            ViewData["Username"] = username;
 
-            return View();
+            return RedirectToAction("Login", "Authentication");
+
+            //return Json(new { Url = "/Authentication/Login" },JsonRequestBehavior.AllowGet);
         }
     }
 }
