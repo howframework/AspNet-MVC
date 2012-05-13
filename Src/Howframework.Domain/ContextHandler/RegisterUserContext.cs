@@ -8,16 +8,16 @@ using Howframework.Domain.UserManagement;
 
 namespace Howframework.Domain.ContextHandler
 {
-    public class RegisterUserContext:ICommandHandler<RegisterCommand>
+    public class RegisterUserContext:BaseContext,ICommandHandler<RegisterUserCommand>
     {
-        public void Handle(RegisterCommand cmd)
+        public void Handle(RegisterUserCommand cmd)
         {
 
-        }
+            using (var uow = server.StartUnitOfWork())
+            {
+                uow.Save<User>(new User { Email = cmd.email, FullName = cmd.fullname, Password = cmd.password, UserName = cmd.username });
+            }
 
-        class Register
-        {
-            
         }
     }
 }

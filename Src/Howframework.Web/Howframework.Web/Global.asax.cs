@@ -4,6 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.Mvc;
+using Howframework.Domain.Infrastructure;
+using Howframework.Domain.Commands;
+using Howframework.Domain.ContextHandler;
+using System.Reflection;
 
 namespace Howframework.Web
 {
@@ -34,7 +40,25 @@ namespace Howframework.Web
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
+
             RegisterRoutes(RouteTable.Routes);
+
+            var builder = new ContainerBuilder();
+
+            var ctx1 = new RegisterUserContext();
+
+            var commandBus = new CommandBus();
+            commandBus.RegisterHandlerCommand<RegisterUserCommand>(ctx1.Handle);
+
+            builder.Register<IBus>(c => commandBus).As<IBus>();
+
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
+
+            var container = builder.Build();
+
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
         }
     }
 }

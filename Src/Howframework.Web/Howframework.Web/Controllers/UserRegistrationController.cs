@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MongoDB.Driver;
 using Howframework.Domain.UserManagement;
 using Howframework.Domain.Infrastructure;
+using Howframework.Domain.Commands;
 
 namespace Howframework.Web.Controllers
 {
@@ -13,12 +14,13 @@ namespace Howframework.Web.Controllers
     {
         //
         // GET: /UserRegistration/
-        protected IUnitOfWork server;
+        //protected IUnitOfWork server;
 
-        public UserRegistrationController()
+        protected IBus bus;
+
+        public UserRegistrationController(IBus bus)
         {
-           
-            server = new MongoDbSession();
+            this.bus = bus;
         }
 
         public ActionResult Index()
@@ -32,18 +34,13 @@ namespace Howframework.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string fullname,string username,string email,string password)
+        public ActionResult Register(RegisterUserCommand cmd)
         {
-           
-            using (var uow = server.StartUnitOfWork())
-            {
-                uow.Save<User>(new User { Email = email, FullName = fullname, Password = password, UserName = username });
-            }
-            TempData["Username"] = username;
+            bus.Send(cmd);
+
+            TempData["Username"] = cmd.username;
 
             return RedirectToAction("Login", "Authentication");
-
-            //return Json(new { Url = "/Authentication/Login" },JsonRequestBehavior.AllowGet);
         }
     }
 }

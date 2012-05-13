@@ -47,9 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\RegisterCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\RegisterUserCommand.cs" />
+    <Compile Include="ContextHandler\BaseContext.cs" />
     <Compile Include="ContextHandler\RegisterUserContext.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Infrastructure\CommandBus.cs" />
+    <Compile Include="Infrastructure\IBus.cs" />
     <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\MongoDbSession.cs" />

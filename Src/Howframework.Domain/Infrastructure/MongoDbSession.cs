@@ -17,7 +17,7 @@ namespace Howframework.Domain.Infrastructure
 
         public IUnitOfWork StartUnitOfWork()
         {
-            var connectionString = System.Configuration.ConfigurationManager.AppSettings.Get("MONGOLAB_URI"); //AppSettings //"mongodb://localhost/?safe=true";
+            var connectionString = GetMongoDbConnectionString();
             if (connectionString.Contains("localhost"))
             {
                 mongoServer = MongoServer.Create(connectionString);
@@ -52,6 +52,13 @@ namespace Howframework.Domain.Infrastructure
         public void Dispose()
         {
             
+        }
+
+        private string GetMongoDbConnectionString()
+        {
+            return ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
+                ConfigurationManager.AppSettings.Get("MONGOLAB_URI") ??
+                ConfigurationManager.AppSettings.Get("LOCAL_MONGODB_URI");
         }
     }
 }
