@@ -36,11 +36,20 @@ namespace Howframework.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterUserCommand cmd)
         {
-            bus.Send(cmd);
+            try
+            {
+                bus.Send(cmd);
 
-            TempData["Username"] = cmd.username;
+                TempData["Username"] = cmd.username;
 
-            return RedirectToAction("Login", "Authentication");
+                return RedirectToAction("Login", "Authentication");
+            }
+            catch (Exception err)
+            {
+                TempData["ErrorMessage"] = err.Message;
+
+                return RedirectToAction("Error", "Notification");
+            }
         }
     }
 }
