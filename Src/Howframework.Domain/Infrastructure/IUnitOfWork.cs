@@ -12,5 +12,7 @@ namespace Howframework.Domain.Infrastructure
         void Save<T>(T entity);
 
         T GetById<T>(dynamic Id);
+
+        IQueryable<T> Query<T>();
     }
 }

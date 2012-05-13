@@ -8,26 +8,26 @@
 				<div class="row">
 					<div class="span12 well" style="margin-top: 20px;">
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="/Authentication/Login">
   <fieldset>
     <legend>Login</legend>
-			<div>&nbsp;</div>
-          <div class="alert alert-error">
+
+         @* <div class="alert alert-error">
             <button class="close" data-dismiss="alert">&times;</button>
             <strong>Invalid username or password</strong>
-          </div>	
+          </div>*@	
     <div class="control-group error">
       <label class="control-label" for="username">Username</label>
       <div class="controls">
-        <input type="text" class="input-xlarge" id="username" name="username">
-        <p class="help-inline">Username is required</p>
+        <input type="text" class="input-xlarge" id="username" name="username" value="@ViewBag.Username">
+        <p class="help-inline" style="display:none">Username is required</p>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="password">Password</label>
       <div class="controls">
         <input type="password" class="input-xlarge" id="password" name="password">
-        <p class="help-inline">Supporting help text</p>
+        <p class="help-inline" style="display:none">Supporting help text</p>
       </div>
     </div>	
     <div class="control-group">

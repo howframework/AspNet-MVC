@@ -11,16 +11,23 @@ namespace Howframework.Domain.Infrastructure
 {
     public class MongoDbSession : IUnitOfWork
     {
-        //MongoServer mongoServer;
+        MongoServer mongoServer;
 
         MongoDatabase mongoDb;
 
         public IUnitOfWork StartUnitOfWork()
         {
             var connectionString = System.Configuration.ConfigurationManager.AppSettings.Get("MONGOLAB_URI"); //AppSettings //"mongodb://localhost/?safe=true";
-            mongoDb = MongoDatabase.Create(connectionString); //MongoServer.Create(connectionString);
-            //MongoCredentials credentials = new MongoCredentials("howframework", "linuxpython");
-            //mongoDb = mongoServer.GetDatabase("howframework");
+            if (connectionString.Contains("localhost"))
+            {
+                mongoServer = MongoServer.Create(connectionString);
+                mongoDb = mongoServer.GetDatabase("howframework");
+            }
+            else
+            {
+                mongoDb = MongoDatabase.Create(connectionString);
+            }
+           
             return this;
         }
 
@@ -34,6 +41,12 @@ namespace Howframework.Domain.Infrastructure
         {
             var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
             return s.FindOneById(Id);
+        }
+
+        public IQueryable<T> Query<T>()
+        {
+            var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
+            return s.AsQueryable<T>();
         }
 
         public void Dispose()

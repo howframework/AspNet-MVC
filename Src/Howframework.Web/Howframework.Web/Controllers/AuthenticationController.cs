@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Howframework.Domain.Infrastructure;
 using System.Web.Security;
+using MongoDB.Driver.Linq;
+using Howframework.Domain.UserManagement;
 
 namespace Howframework.Web.Controllers
 {
@@ -22,6 +24,9 @@ namespace Howframework.Web.Controllers
 
         public ActionResult Login()
         {
+            if (TempData["Username"] != null)
+                ViewBag.Username = TempData["Username"];
+
             return View();
         }
 
@@ -30,8 +35,18 @@ namespace Howframework.Web.Controllers
         {
             using (var s = server.StartUnitOfWork())
             {
-                FormsAuthentication.SetAuthCookie(username, true);
-                return RedirectToAction("Index", "Dashboard");
+                var query = s.Query<User>().Where(c => c.UserName == username && c.Password == password).FirstOrDefault();
+                if (query != null)
+                {
+                    FormsAuthentication.SetAuthCookie(username, true);
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Invalid username or password";
+
+                    return RedirectToAction("Error", "Notification");
+                }
             }
         }
 

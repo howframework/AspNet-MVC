@@ -39,7 +39,7 @@ namespace Howframework.Web.Controllers
             {
                 uow.Save<User>(new User { Email = email, FullName = fullname, Password = password, UserName = username });
             }
-            ViewData["Username"] = username;
+            TempData["Username"] = username;
 
             return RedirectToAction("Login", "Authentication");
 
