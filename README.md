@@ -12,6 +12,11 @@ Before you begin, you should install the following pre-requisites:
 * Visual Studio 2010/Express or later
 * SQL Server 2008 Express or later
 * ASP.NET MVC 3 (Visual Studio 2010)
+* MongoDB (NoSQL) http://www.mongodb.org - (I am using MongoVue  - GUI Management Studio for MongoDB)
+                                                                
+What Are the Motivations for Creating This Framework
+====================================================
+TBD
 
 Logs
 ====
