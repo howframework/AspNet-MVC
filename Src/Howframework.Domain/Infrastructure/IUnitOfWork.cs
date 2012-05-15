@@ -14,5 +14,7 @@ namespace Howframework.Domain.Infrastructure
         T GetById<T>(dynamic Id);
 
         IQueryable<T> Query<T>();
+
+        void Commit();
     }
 }

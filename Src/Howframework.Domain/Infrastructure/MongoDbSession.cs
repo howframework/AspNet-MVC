@@ -14,6 +14,7 @@ namespace Howframework.Domain.Infrastructure
         MongoServer mongoServer;
 
         MongoDatabase mongoDb;
+        protected IDictionary<Type,dynamic> entityUoW = new Dictionary<Type,dynamic>();
 
         public IUnitOfWork StartUnitOfWork()
         {
@@ -27,14 +28,17 @@ namespace Howframework.Domain.Infrastructure
             {
                 mongoDb = MongoDatabase.Create(connectionString);
             }
-           
+
+            entityUoW.Clear();
+
             return this;
         }
 
         public void Save<T>(T entity)
         {
-            var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
-            s.Save<T>(entity);
+            //var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
+            //s.Save<T>(entity);
+            entityUoW.Add(typeof(T),entity);
         }
 
         public T GetById<T>(dynamic Id)
@@ -47,6 +51,15 @@ namespace Howframework.Domain.Infrastructure
         {
             var s = mongoDb.GetCollection<T>(typeof(T).Name.ToLower());
             return s.AsQueryable<T>();
+        }
+
+        public void Commit()
+        {
+            foreach (var entity in entityUoW)
+            {
+                var s = mongoDb.GetCollection(entity.Key, entity.Key.Name.ToLower());
+                s.Save(entity.Key, entity.Value);
+            }
         }
 
         public void Dispose()
