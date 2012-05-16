@@ -16,7 +16,7 @@ Before you begin, you should install the following pre-requisites:
                                                                 
 What Are the Motivations for Creating This Framework
 ====================================================
-TBD
+Sometime it's very difficult to find good framework with complete documentation.
 
 Logs
 ====
